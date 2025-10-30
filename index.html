@@ -859,16 +859,16 @@ Promemoria per la configurazione di Formsubmit
       color: #8ea3c7;
     }
 
-    .content-info h2 {
-      font-size: clamp(1.35rem, 1vw + 1.1rem, 1.65rem);
+    .content-title {
+      font-size: clamp(1.9rem, 2.2vw + 1.2rem, 2.8rem);
       margin: 0;
       font-weight: 600;
       color: #f4f6fb;
     }
 
-    .content-info p {
+    .content-subtitle {
       margin: 0;
-      font-size: 0.98rem;
+      font-size: clamp(1rem, 0.4vw + 0.95rem, 1.2rem);
       color: #b8c8e5;
       line-height: 1.6;
     }
@@ -1714,8 +1714,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
         const showLowQualityQuestion = quality >= 1 && quality <= 3;
         const videoUrl = entry.url;
         const videoMimeType = getVideoMimeType(videoUrl);
-        const clipSpecificTitle = entry.clipTitle ? ` · ${entry.clipTitle}` : '';
-        const clipLabel = `Clip ${entry.clipNumber} di ${entry.content.clipCount}${clipSpecificTitle}`;
+        const clipLabel = `Clip ${entry.clipNumber} di ${entry.content.clipCount}`;
         const progressLabel = `Video ${index + 1} di ${total} · ${entry.section.title}`;
         const sectionTooltip = entry.section.description ? ` title="${escapeAttribute(entry.section.description)}"` : '';
         const clipTitles = Array.isArray(entry.content.clipTitles) ? entry.content.clipTitles : [];
@@ -1730,6 +1729,16 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
           return `<span class="${classes}" role="listitem"${ariaCurrent} aria-label="${escapeAttribute(dotLabel)}">${clipIdx + 1}</span>`;
         }).join('');
         const contentGroupLabel = `${entry.section.title} – ${entry.content.title}`;
+        const mainTitle = isNonEmptyString(entry.clipTitle) ? entry.clipTitle : entry.content.title;
+        const subtitleParts = [];
+        if (isNonEmptyString(entry.content.title)) {
+          subtitleParts.push(`<strong>${escapeHtml(entry.content.title)}</strong>`);
+        }
+        if (isNonEmptyString(entry.content.description)) {
+          subtitleParts.push(escapeHtml(entry.content.description));
+        }
+        const subtitleHtml = subtitleParts.length > 0 ? `<p class="content-subtitle">${subtitleParts.join(' · ')}</p>` : '';
+
         appEl.innerHTML = `
           <section class="card" aria-labelledby="step-title">
             <header class="top-bar">
@@ -1741,8 +1750,8 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
               <div class="content-meta" role="group" aria-label="${escapeAttribute(contentGroupLabel)}">
                 <div class="content-info">
                   <span class="eyebrow">Contenuto</span>
-                  <h2>${escapeHtml(entry.content.title)}</h2>
-                  ${entry.content.description ? `<p>${escapeHtml(entry.content.description)}</p>` : ''}
+                  <h2 class="content-title">${escapeHtml(mainTitle)}</h2>
+                  ${subtitleHtml}
                 </div>
                 <div class="clip-progress">
                   <span class="eyebrow">Clip</span>
@@ -1765,8 +1774,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
               </div>
               <form class="questions" id="step-form">
                 <fieldset class="stars-fieldset">
-                  <legend>Valuta la qualit&agrave;</legend>
-                  <p class="fieldset-note rating-note">1 = scarso &bull; 5 = eccellente</p>
+                  <legend class="sr-only">Valuta la qualit&agrave;</legend>
                   <div class="stars" role="radiogroup" aria-label="Valutazione della qualit&agrave; da una a cinque stelle">
                     ${[1, 2, 3, 4, 5].map((value) => `
                       <div class="star-wrapper">
