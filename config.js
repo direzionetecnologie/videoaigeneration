@@ -5,8 +5,6 @@ window.CONFIG = {
   sections: [
     {
       title: 'Ricostruzioni di cronaca generate da script',
-      description:
-        'Valutazione del realismo di contenuti video prodotti automaticamente a partire da sceneggiature di eventi di cronaca.',
       contents: [
         {
           title: 'Beyond Jupiter Studios',
