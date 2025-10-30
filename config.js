@@ -7,79 +7,77 @@ window.CONFIG = {
       title: 'Clip estere doppiate in italiano',
       contents: [
         {
-          title: 'Liquid Universe',
-          description: 'Documentario',
+          title: 'La strage di Erba',
+          description: 'Beyond Jupiter Studios',
           videos: [
-            'IT_B2_LIQUID_UNIVERSE_Panjaya_DUB.mp4',
-            'B2_LIQUID_UNIVERSE_IT_ElevenLabs_2025-06-20.mp4',
-            'LiquidUniverse_DoppiaggioUmano.mp4',
-            'B2_Liquid_Universe_IT-IT_VOISEED.mp4',
-            'B2_LIQUID_UNIVERSE-IT_TRANSLATED.mp4'
-          ]
-        },
+            'TestErba_BeyondJupiterStudios.mp4',
+            ]
+             },
         {
-          title: 'Yargi',
-          description: 'Serie TV Turca',
+          title: 'La strage di Erba',
+          description: 'Reply Bitmama',
           videos: [
-            'A2_Yargi_IT_ElevenLabs_2025-09-25.mp4',
-            'A2_YARGI_IT-IT_VOISEED.mp4',
-            'A2_YARGI-IT_TRANSLATED.mp4',
-            'SegretiDiFamiglia_DoppiaggioUmano.mp4',
-            'IT_A2_YARGI_Panjaya_DUB.mp4'
-          ]
-        },
+            'Reply_Scena_Strage_Di_Erba.mov',
+            ]
+             },
         {
-          title: 'Chicago Fire',
-          description: 'Serie TV US',
+          title: 'La strage di Erba',
+          description: 'Kortocircuito',
           videos: [
-            'A3_CHICAGO FIRE (V2)_IT_ElevenLabs_2025-09-12.mp4',
-            'A3_CHICAGO_FIRE_IT-IT_VOISEED.mp4',
-            'A3_CHICAGO_FIRE-IT_TRANSLATED.mp4',
-            'ChicagoFire_DoppiaggioUmano.mp4',
-            'IT_A3_CHICAGO_FIRE_Panjaya_DUB.mp4'
-          ]
-        },
-         {
-          title: 'La Casa Fuerte',
-          description: 'TV Show',
-          videos: [
-            'C2_LA_CASA_FUERTE_IT-IT_VOISEED.mp4',
-            'C2 LA CASA FUERTE_IT_ElevenLabs_2025-09-25.mp4'
-          ]
-        },
-      ]
-    },
-    {
-      title: 'Clip italiane doppiate in inglese',
-      contents: [
+            'Kortocircuito_edit_Test_Laura Ziliani.mp4',
+            ]
+             },
         {
-          title: 'Viaggio nella Grande Bellezza',
-          description: 'Documentario',
+          title: 'L'omicidio di Laura Ziliani',
+          description: 'Kortocircuito',
           videos: [
-            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA_EN_ElevenLabs_2025-09-15.mp4',
-            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA_EN-US_VOISEED.mp4',
-            'B1_VIAGGIO_NELLA_GRANDE_BELLEZZA-EN_TRANSLATED.mp4'
-          ]
-        },
+            'Kortocircuito_ERBA FINAL 4K.mp4',
+            ]
+             },
         {
-          title: 'Squadra Antimafia',
-          description: 'Serie TV',
+          title: 'La strage di Erba',
+          description: 'Jakala',
           videos: [
-            'A1_SQUADRA_ANTIMAFIA_EN_ElevenLabs_2025-09-15.mp4',
-            'A1_SQUADRA_ANTIMAFIA_EN-US_VOISEED.mp4',
-            'A1_SQUADRA_ANTIMAFIA-EN_TRANSLATED.mp4',
-            'A1_SQUADRA_ANTIMAFIA-en-US_DEEPDUB.mp4'
-          ]
-        },
+            'Jakala_Strage_Erba_Output.mp4',
+            ]
+             },
         {
-          title: 'La Casa Fuerte',
-          description: 'TV Show',
+          title: 'La strage di Erba',
+          description: 'Accenture Song',
           videos: [
-            'C2_LA_CASA_FUERTE_EN-US_VOISEED.mp4',
-            'C2 LA CASA FUERTE_EN_ElevenLabs_2025-09-25.mp4',
-          ]
-        }
+            'ACN_Song_Mediaset_Rosa e Olindo.mp4',
+            ]
+             },
+      {
+          title: 'La strage di Erba',
+          description: 'Autori Multimediali',
+          videos: [
+            'Autori-Multimediali_SEQUENZA-ERBA-demo.mp4',
+            ]
+             },
+      {
+          title: 'La strage di Erba',
+          description: 'Bad Idea',
+          videos: [
+            'BadIdea_01 Scena Strage di Erba.mov',
+            ]
+             },
+      {
+          title: 'L'omicidio di Laura Ziliani',
+          description: 'Bad Idea',
+          videos: [
+            'BadIdea_02 Scena Omicidio Laura Ziliani.mp4',
+            ]
+             },
+      {
+          title: 'La strage di Erba',
+          description: 'Fiven AI',
+          videos: [
+            'Fiven_AI_Video_Demo_Strage_Erba.mp4',
+            ]
+             }
       ]
     }
   ]
 };
+
