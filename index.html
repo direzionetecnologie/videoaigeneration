@@ -720,20 +720,40 @@ Promemoria per la configurazione di Formsubmit
     }
 
     .stars-fieldset {
-      margin-bottom: 0.25rem;
+      margin: 0;
+      padding: clamp(1.1rem, 2vw, 1.6rem);
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(160deg, rgba(18, 26, 36, 0.88), rgba(9, 13, 20, 0.9));
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.75rem, 1.5vh, 1rem);
+    }
+
+    .stars-legend {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: center;
+      color: #d8e7ff;
+    }
+
+    .stars-helper {
+      margin: 0;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #8ea3c7;
+      max-width: 36ch;
     }
 
     .stars {
       display: inline-flex;
-      gap: 0.4rem;
+      gap: clamp(0.45rem, 1vw, 0.75rem);
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 0.45rem 0.65rem;
-      border-radius: 18px;
-      border: 1px solid rgba(108, 181, 255, 0.22);
-      background: radial-gradient(circle at top, rgba(108, 181, 255, 0.16), rgba(28, 46, 71, 0.2) 55%, rgba(12, 20, 31, 0.3));
-      box-shadow: inset 0 0 18px rgba(8, 15, 26, 0.45);
     }
 
     .stars input[type="radio"] {
@@ -743,10 +763,10 @@ Promemoria per la configurazione di Formsubmit
     }
 
     .stars label {
-      font-size: clamp(2rem, 3vw + 1rem, 2.55rem);
+      font-size: clamp(2.05rem, 3vw + 1rem, 2.6rem);
       color: #2f3845;
       cursor: pointer;
-      transition: color 0.2s ease, transform 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease, outline-color 0.2s ease;
       padding: 0.1rem 0.25rem;
       border-radius: 0.4rem;
       display: inline-flex;
@@ -758,15 +778,35 @@ Promemoria per la configurazione di Formsubmit
     .stars label.active {
       color: #f6c445;
       text-shadow: 0 0 18px rgba(246, 196, 69, 0.45);
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
     .stars label:hover,
     .stars label:focus-visible,
     .stars input[type="radio"]:focus + label {
       color: #ffe27a;
-      box-shadow: 0 0 0 2px rgba(116, 154, 255, 0.35);
-      transform: scale(1.05);
+      background: rgba(116, 154, 255, 0.12);
+      outline: 2px solid rgba(116, 154, 255, 0.35);
+      outline-offset: 4px;
+      transform: translateY(-2px);
+    }
+
+    .stars-scale {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #7c93b6;
+    }
+
+    .stars-scale span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
     }
 
     .progress {
@@ -1738,6 +1778,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
           subtitleParts.push(escapeHtml(entry.content.description));
         }
         const subtitleHtml = subtitleParts.length > 0 ? `<p class="content-subtitle">${subtitleParts.join(' · ')}</p>` : '';
+        const qualityHintId = `quality-hint-${index + 1}`;
 
         appEl.innerHTML = `
           <section class="card" aria-labelledby="step-title">
@@ -1774,14 +1815,19 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
               </div>
               <form class="questions" id="step-form">
                 <fieldset class="stars-fieldset">
-                  <legend class="sr-only">Valuta la qualit&agrave;</legend>
-                  <div class="stars" role="radiogroup" aria-label="Valutazione della qualit&agrave; da una a cinque stelle">
+                  <legend class="stars-legend">Valuta la qualit&agrave; complessiva</legend>
+                  <p class="stars-helper" id="${qualityHintId}">Legenda: 1 = Bassa qualit&agrave;, 5 = Eccellente</p>
+                  <div class="stars" role="radiogroup" aria-label="Valutazione della qualit&agrave; da una a cinque stelle" aria-describedby="${qualityHintId}">
                     ${[1, 2, 3, 4, 5].map((value) => `
                       <div class="star-wrapper">
                         <input type="radio" id="quality-${value}" name="quality" value="${value}" ${quality === value ? 'checked' : ''}>
                         <label for="quality-${value}" data-value="${value}" aria-label="${value} ${value === 1 ? 'stella' : 'stelle'}">★</label>
                       </div>
                     `).join('')}
+                  </div>
+                  <div class="stars-scale" aria-hidden="true">
+                    <span>1 · Da migliorare</span>
+                    <span>5 · Eccellente</span>
                   </div>
                 </fieldset>
                 <fieldset class="followup-fieldset" data-role="low-quality-reason" ${showLowQualityQuestion ? '' : 'hidden'}>
