@@ -1,83 +1,72 @@
 window.CONFIG = {
-  SURVEY_TITLE: 'Test di Valutazione del Doppiaggio',
+  SURVEY_TITLE: 'Valutazione di Ricostruzioni Video Generate con AI',
   FORM_ENDPOINT: 'https://formsubmit.co/ajax/tech.transformation.mdst@gmail.com',
   VIDEO_BASE_URL: 'https://aiworkshopmediaset.s3.eu-west-1.amazonaws.com/video/',
   sections: [
     {
-      title: 'Clip estere doppiate in italiano',
+      title: 'Ricostruzioni di cronaca generate da script',
+      description:
+        'Valutazione del realismo di contenuti video prodotti automaticamente a partire da sceneggiature di eventi di cronaca.',
       contents: [
         {
-          title: 'La strage di Erba',
-          description: 'Beyond Jupiter Studios',
+          title: 'Beyond Jupiter Studios',
+          description: 'Output generativi sviluppati da Beyond Jupiter Studios partendo dagli script forniti.',
           videos: [
-            'TestErba_BeyondJupiterStudios.mp4',
-            ]
-             },
+            { title: 'La strage di Erba', file: 'TestErba_BeyondJupiterStudios.mp4' }
+          ]
+        },
         {
-          title: 'La strage di Erba',
-          description: 'Reply Bitmama',
+          title: 'Reply Bitmama',
+          description: 'Prototipo generativo realizzato da Reply Bitmama a partire da brief di cronaca.',
           videos: [
-            'Reply_Scena_Strage_Di_Erba.mov',
-            ]
-             },
+            { title: 'La strage di Erba', file: 'Reply_Scena_Strage_Di_Erba.mov' }
+          ]
+        },
         {
-          title: 'La strage di Erba',
-          description: 'Kortocircuito',
+          title: 'Kortocircuito',
+          description: 'Ricostruzioni automatiche sperimentali proposte da Kortocircuito.',
           videos: [
-            'Kortocircuito_edit_Test_Laura Ziliani.mp4',
-            ]
-             },
+            { title: 'La strage di Erba', file: 'Kortocircuito_edit_Test_Laura Ziliani.mp4' },
+            { title: "L'omicidio di Laura Ziliani", file: 'Kortocircuito_ERBA FINAL 4K.mp4' }
+          ]
+        },
         {
-          title: 'L'omicidio di Laura Ziliani',
-          description: 'Kortocircuito',
+          title: 'Jakala',
+          description: 'Ricostruzione scenica generata da Jakala sulla base di script storici.',
           videos: [
-            'Kortocircuito_ERBA FINAL 4K.mp4',
-            ]
-             },
+            { title: 'La strage di Erba', file: 'Jakala_Strage_Erba_Output.mp4' }
+          ]
+        },
         {
-          title: 'La strage di Erba',
-          description: 'Jakala',
+          title: 'Accenture Song',
+          description: 'Sperimentazione di generazione video condotta da Accenture Song.',
           videos: [
-            'Jakala_Strage_Erba_Output.mp4',
-            ]
-             },
+            { title: 'La strage di Erba', file: 'ACN_Song_Mediaset_Rosa e Olindo.mp4' }
+          ]
+        },
         {
-          title: 'La strage di Erba',
-          description: 'Accenture Song',
+          title: 'Autori Multimediali',
+          description: 'Prototipo di storytelling visivo creato da Autori Multimediali.',
           videos: [
-            'ACN_Song_Mediaset_Rosa e Olindo.mp4',
-            ]
-             },
-      {
-          title: 'La strage di Erba',
-          description: 'Autori Multimediali',
+            { title: 'La strage di Erba', file: 'Autori-Multimediali_SEQUENZA-ERBA-demo.mp4' }
+          ]
+        },
+        {
+          title: 'Bad Idea',
+          description: 'Sequenze generate da Bad Idea sulla base degli script condivisi.',
           videos: [
-            'Autori-Multimediali_SEQUENZA-ERBA-demo.mp4',
-            ]
-             },
-      {
-          title: 'La strage di Erba',
-          description: 'Bad Idea',
+            { title: 'La strage di Erba', file: 'BadIdea_01 Scena Strage di Erba.mov' },
+            { title: "L'omicidio di Laura Ziliani", file: 'BadIdea_02 Scena Omicidio Laura Ziliani.mp4' }
+          ]
+        },
+        {
+          title: 'Fiven AI',
+          description: 'Ricostruzione visiva generata automaticamente dal team Fiven AI.',
           videos: [
-            'BadIdea_01 Scena Strage di Erba.mov',
-            ]
-             },
-      {
-          title: 'L'omicidio di Laura Ziliani',
-          description: 'Bad Idea',
-          videos: [
-            'BadIdea_02 Scena Omicidio Laura Ziliani.mp4',
-            ]
-             },
-      {
-          title: 'La strage di Erba',
-          description: 'Fiven AI',
-          videos: [
-            'Fiven_AI_Video_Demo_Strage_Erba.mp4',
-            ]
-             }
+            { title: 'La strage di Erba', file: 'Fiven_AI_Video_Demo_Strage_Erba.mp4' }
+          ]
+        }
       ]
     }
   ]
 };
-

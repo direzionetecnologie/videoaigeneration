@@ -1537,11 +1537,10 @@ Promemoria per la configurazione di Formsubmit
               <img src="MFE_-_MediaForEurope_Logo%20(1).png" alt="Logo MediaForEurope">
             </div>
             <h1 id="welcome-title">${escapeHtml(state.config.SURVEY_TITLE)}</h1>
-            <p>Benvenuta/o al test di valutazione sul doppiaggio dei contenuti audiovisivi. <br> Questo esercizio ha l’obiettivo di raccogliere impressioni e preferenze sulla qualità percepita del doppiaggio. <br>
-Durante il test visionerai una serie di clip, presentate in ordine casuale, che potranno essere state doppiate sia in modalità tradizionale che con Intelligenza Artificiale. <br> Il test è suddiviso in due sezioni:
-<br> • La prima contiene contenuti esteri doppiati in italiano.
-<br> • La seconda contiene contenuti italiani doppiati in inglese. <br> Ti chiediamo di indicare per ciascun video il livello di qualità percepito, esprimendo una valutazione da 1 (pessima qualità) a 5 (elevata qualità).<br> Le tue risposte saranno utilizzate esclusivamente per fini di analisi comparativa e ti verrà restituito il risultato del test attraverso un report complessivo. <br> Ti invitiamo ad ascoltare con attenzione e a rispondere in modo spontaneo, basandoti sulle tue percezioni personali. <br> <strong> Ti chiediamo di completare il test entro il 15 ottobre. </strong> <br> Grazie per la tua collaborazione e per il contributo alla sperimentazione. <br> </p>
-<p> Clicca sul <strong> + </strong> per esplorare il contenuto della survey. </p>
+            <p>Benvenuta/o al test di valutazione delle ricostruzioni video generative. <br> L’obiettivo è verificare quanto i contenuti prodotti automaticamente a partire da script riescano a raccontare in modo realistico fatti di cronaca realmente accaduti. <br>
+Durante il test visionerai serie di clip raggruppate per team di produzione: ogni gruppo può includere più ricostruzioni relative a casi differenti. </p>
+            <p>Ti chiediamo di indicare per ciascun video il livello di realismo percepito, esprimendo una valutazione da 1 (per nulla realistico) a 5 (estremamente realistico). <br> Le tue risposte saranno utilizzate esclusivamente per le analisi interne della sperimentazione. Ti invitiamo a osservare con attenzione e a rispondere in modo spontaneo, basandoti sulle tue percezioni personali. </p>
+            <p> Clicca sul <strong> + </strong> per esplorare il contenuto della survey. </p>
             ${overviewWrapperMarkup}
             <p> Clicca “Inizia” per cominciare. </p>
             <button type="button" id="start-btn">Inizia</button>
@@ -1715,12 +1714,17 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
         const showLowQualityQuestion = quality >= 1 && quality <= 3;
         const videoUrl = entry.url;
         const videoMimeType = getVideoMimeType(videoUrl);
-        const clipLabel = `Clip ${entry.clipNumber} di ${entry.content.clipCount}`;
+        const clipSpecificTitle = entry.clipTitle ? ` · ${entry.clipTitle}` : '';
+        const clipLabel = `Clip ${entry.clipNumber} di ${entry.content.clipCount}${clipSpecificTitle}`;
         const progressLabel = `Video ${index + 1} di ${total} · ${entry.section.title}`;
         const sectionTooltip = entry.section.description ? ` title="${escapeAttribute(entry.section.description)}"` : '';
+        const clipTitles = Array.isArray(entry.content.clipTitles) ? entry.content.clipTitles : [];
         const clipDots = Array.from({ length: entry.content.clipCount }, (_, clipIdx) => {
           const isActive = clipIdx === entry.clipIndex;
-          const dotLabel = `Clip ${clipIdx + 1} di ${entry.content.clipCount}`;
+          const clipTitle = clipTitles[clipIdx];
+          const dotLabel = clipTitle
+            ? `Clip ${clipIdx + 1} di ${entry.content.clipCount} · ${clipTitle}`
+            : `Clip ${clipIdx + 1} di ${entry.content.clipCount}`;
           const ariaCurrent = isActive ? ' aria-current="true"' : '';
           const classes = `clip-dot${isActive ? ' is-active' : ''}`;
           return `<span class="${classes}" role="listitem"${ariaCurrent} aria-label="${escapeAttribute(dotLabel)}">${clipIdx + 1}</span>`;
@@ -2235,6 +2239,9 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
           record.content_title = entry.content.title;
           record.clip_number = entry.clipNumber;
           record.clip_total = entry.content.clipCount;
+          if (entry.clipTitle) {
+            record.clip_title = entry.clipTitle;
+          }
         }
         answer.submissionId = submissionId;
         answer.posted = false;
@@ -2419,8 +2426,9 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
             if (!Array.isArray(content.videos) || content.videos.length === 0) {
               throw new Error(`Il contenuto "${contentTitle}" nella sezione "${title}" deve includere almeno un video.`);
             }
-            const normalizedVideos = normalizeVideos(content.videos, contentBase).map((url, videoIndex) => ({
-              url,
+            const normalizedVideos = normalizeVideos(content.videos, contentBase).map((video, videoIndex) => ({
+              url: video.url,
+              title: video.title,
               id: `${contentId}-clip-${String(videoIndex + 1).padStart(2, '0')}`
             }));
             return {
@@ -2444,6 +2452,7 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
         sections.forEach((section, sectionIndex) => {
           section.contents.forEach((content, contentIndex) => {
             const totalClips = content.videos.length;
+            const clipTitles = content.videos.map((video) => (isNonEmptyString(video.title) ? video.title : ''));
             content.videos.forEach((video, clipIndex) => {
               playlist.push({
                 url: video.url || '',
@@ -2459,10 +2468,12 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
                   title: content.title,
                   description: content.description,
                   index: contentIndex,
-                  clipCount: totalClips
+                  clipCount: totalClips,
+                  clipTitles
                 },
                 clipIndex,
-                clipNumber: clipIndex + 1
+                clipNumber: clipIndex + 1,
+                clipTitle: isNonEmptyString(video.title) ? video.title : ''
               });
             });
           });
@@ -2522,8 +2533,19 @@ Durante il test visionerai una serie di clip, presentate in ordine casuale, che 
           if (!isNonEmptyString(resolved)) {
             throw new Error(`Voce video non valida in posizione ${index + 1}.`);
           }
-          return resolved;
+          const title = getVideoTitle(entry);
+          return {
+            url: resolved,
+            title
+          };
         });
+      }
+
+      function getVideoTitle(entry) {
+        if (entry && typeof entry === 'object' && isNonEmptyString(entry.title)) {
+          return entry.title.trim();
+        }
+        return '';
       }
 
       function resolveVideoEntry(entry, baseUrl) {
