@@ -23,8 +23,8 @@ window.CONFIG = {
         {
           title: 'Kortocircuito',
           videos: [
-            { title: 'La strage di Erba', file: 'Kortocircuito_edit_Test_Laura Ziliani.mp4' },
-            { title: "L'omicidio di Laura Ziliani", file: 'Kortocircuito_ERBA FINAL 4K.mp4' }
+            { title: 'La strage di Erba', file: 'Kortocircuito_ERBA FINAL 4K.mp4' },
+            { title: "L'omicidio di Laura Ziliani", file: 'Kortocircuito_edit_Test_Laura Ziliani.mp4' }
           ]
         },
         {
