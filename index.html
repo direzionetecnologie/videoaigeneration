@@ -1365,8 +1365,8 @@ Promemoria per la configurazione di Formsubmit
             </div>
             <h1 id="welcome-title">${escapeHtml(state.config.SURVEY_TITLE)}</h1>
             <p>Benvenuta/o al test di valutazione delle ricostruzioni video generative. <br> L’obiettivo è verificare quanto i contenuti prodotti automaticamente a partire da script riescano a raccontare in modo realistico fatti di cronaca realmente accaduti. <br>
-Durante il test visionerai serie di clip raggruppate per team di produzione: ogni gruppo può includere più ricostruzioni relative a casi differenti. </p>
-            <p>Ti chiediamo di indicare per ciascun video il livello di realismo percepito, esprimendo una valutazione da 1 (per nulla realistico) a 5 (estremamente realistico). <br> Le tue risposte saranno utilizzate esclusivamente per le analisi interne della sperimentazione. Ti invitiamo a osservare con attenzione e a rispondere in modo spontaneo, basandoti sulle tue percezioni personali. </p>
+Durante il test visionerai serie di clip raggruppate per provider: ogni gruppo può includere più ricostruzioni relative a casi differenti. </p>
+            <p>Ti chiediamo di indicare per ciascun video il livello di realismo percepito, esprimendo una valutazione da 1 (per nulla realistico) a 5 (estremamente realistico). </p>
             <p> Clicca sul <strong> + </strong> per esplorare il contenuto della survey. </p>
             ${overviewWrapperMarkup}
             <p> Clicca “Inizia” per cominciare. </p>
@@ -1415,7 +1415,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
           const listMarkup = itemsMarkup ? `<ul class="overview-contents">${itemsMarkup}</ul>` : '';
           const contentCount = contents.length;
           const totalClips = contents.reduce((acc, content) => acc + (Array.isArray(content.videos) ? content.videos.length : 0), 0);
-          const contentLabel = contentCount === 1 ? '1 contenuto' : `${contentCount} contenuti`;
+          const contentLabel = contentCount === 1 ? '1 provider' : `${contentCount} providers`;
           const clipLabel = totalClips === 1 ? '1 clip' : `${totalClips} clip`;
           const sectionId = `overview-section-${sectionIndex}`;
           const panelId = `overview-panel-${sectionIndex}`;
@@ -1507,7 +1507,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
           const contents = Array.isArray(section.contents) ? section.contents : [];
           const clipCount = contents.reduce((acc, content) => acc + (Array.isArray(content.videos) ? content.videos.length : 0), 0);
           const contentCount = contents.length;
-          const contentLabel = contentCount === 1 ? '1 contenuto' : `${contentCount} contenuti`;
+          const contentLabel = contentCount === 1 ? '1 provider' : `${contentCount} providers`;
           const clipLabel = clipCount === 1 ? '1 clip' : `${clipCount} clip`;
           return `
             <li class="final-summary-item">
@@ -1535,7 +1535,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
         const videoUrl = entry.url;
         const videoMimeType = getVideoMimeType(videoUrl);
         const clipLabel = `Clip ${entry.clipNumber} di ${entry.content.clipCount}`;
-        const progressLabel = `Video ${index + 1} di ${total} · ${entry.section.title}`;
+        const progressLabel = `Video ${index + 1} di ${total}`;
         const sectionTooltip = entry.section.description ? ` title="${escapeAttribute(entry.section.description)}"` : '';
         const clipTitles = Array.isArray(entry.content.clipTitles) ? entry.content.clipTitles : [];
         const clipDots = Array.from({ length: entry.content.clipCount }, (_, clipIdx) => {
@@ -1775,7 +1775,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
           ? state.config.sections.reduce((acc, section) => acc + (Array.isArray(section.contents) ? section.contents.length : 0), 0)
           : 0;
         const summaryNote = sectionsCount > 0 && totalContents > 0
-          ? `Distribuite in ${sectionsCount} ${sectionsCount === 1 ? 'sezione' : 'sezioni'} e ${totalContents} ${totalContents === 1 ? 'contenuto' : 'contenuti'}.`
+          ? `Distribuite in ${sectionsCount} ${sectionsCount === 1 ? 'sezione' : 'sezioni'} e ${totalContents} ${totalContents === 1 ? 'provider' : 'providers'}.`
           : '';
         const noteText = state.submitted
           ? ''
