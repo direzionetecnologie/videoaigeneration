@@ -561,17 +561,6 @@ Promemoria per la configurazione di Formsubmit
       display: none !important;
     }
 
-    .followup-fieldset {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .followup-fieldset[data-visible="true"] {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     legend {
       font-size: clamp(1.02rem, 1.5vw, 1.18rem);
       margin: 0 0 0.6rem;
@@ -579,146 +568,6 @@ Promemoria per la configurazione di Formsubmit
       color: #f2f5ff;
       letter-spacing: 0.01em;
     }
-
-    .fieldset-note {
-      margin: 0 0 0.75rem;
-      font-size: 0.9rem;
-      color: #9fb3d8;
-    }
-
-    .rating-note {
-      color: #7ea8dd;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-    }
-
-    .improvement-options {
-      display: grid;
-      gap: 0.8rem;
-    }
-
-    @media (min-width: 640px) {
-      .improvement-options {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        align-items: stretch;
-      }
-    }
-
-    .option {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.65rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(108, 181, 255, 0.16);
-      border-radius: 14px;
-      padding: clamp(0.75rem, 0.65vw + 0.55rem, 1rem) clamp(0.85rem, 0.8vw + 0.6rem, 1.2rem);
-      font-size: 0.98rem;
-      color: #e4ebff;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .option:hover,
-    .option:focus-within {
-      border-color: rgba(108, 181, 255, 0.55);
-      background: rgba(108, 181, 255, 0.14);
-      transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(9, 16, 27, 0.35);
-    }
-
-    .option input[type="checkbox"] {
-      margin-top: 0.15rem;
-      width: 1rem;
-      height: 1rem;
-      accent-color: #6cb5ff;
-      flex-shrink: 0;
-      border-radius: 6px;
-    }
-
-    .option span {
-      line-height: 1.35;
-      font-weight: 500;
-      flex: 1;
-    }
-
-    .option-other {
-      flex-direction: column;
-      gap: 0.75rem;
-      padding: clamp(0.95rem, 0.8vw + 0.75rem, 1.2rem);
-      grid-column: 1 / -1;
-      cursor: default;
-    }
-
-    .option-other .option-header {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .option-other .option-header label {
-      cursor: pointer;
-      font-weight: 600;
-      color: #f1f6ff;
-    }
-
-    .option-other textarea {
-      width: 100%;
-      min-height: 3.6rem;
-      resize: vertical;
-      border-radius: 12px;
-      border: 1px solid rgba(108, 181, 255, 0.3);
-      background: rgba(12, 20, 30, 0.72);
-      color: #f5f8ff;
-      font-family: inherit;
-      font-size: 0.96rem;
-      line-height: 1.5;
-      padding: 0.65rem 0.75rem;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
-    }
-
-    .option-other textarea::placeholder {
-      color: #9fb3d8;
-    }
-
-    .option-other textarea:focus {
-      outline: none;
-      border-color: rgba(123, 208, 255, 0.8);
-      box-shadow: 0 8px 18px rgba(16, 30, 46, 0.45);
-      background: rgba(16, 28, 42, 0.95);
-    }
-
-    .option-other textarea:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-      border-color: rgba(108, 181, 255, 0.14);
-      background: rgba(10, 16, 24, 0.55);
-      box-shadow: none;
-    }
-
-    .option-other.is-active {
-      border-color: rgba(123, 208, 255, 0.65);
-      background: linear-gradient(160deg, rgba(18, 26, 36, 0.94), rgba(9, 13, 20, 0.92));
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-    }
-
-    .option-other.is-active .option-header label {
-      color: #d2e8ff;
-    }
-
-    .option-helper {
-      margin: 0;
-      font-size: 0.82rem;
-      color: #8ea3c7;
-      line-height: 1.4;
-    }
-
-    .option-other.is-active .option-helper {
-      color: #b9d6ff;
-    }
-
     .stars-fieldset {
       margin: 0;
       padding: clamp(1.1rem, 2vw, 1.6rem);
@@ -1204,59 +1053,6 @@ Promemoria per la configurazione di Formsubmit
         queueLength: 0
       };
 
-      const LOW_QUALITY_OTHER_VALUE = 'other';
-      const LOW_QUALITY_REASONS = [
-        { value: 'lip-sync', label: 'Sincronizzazione labiale' },
-        { value: 'voice', label: 'Qualità vocale' },
-        { value: LOW_QUALITY_OTHER_VALUE, label: 'Altro', type: 'other' }
-      ];
-
-      function isValidLowQualityReasonValue(value) {
-        return typeof value === 'string' && LOW_QUALITY_REASONS.some((reason) => reason.value === value);
-      }
-
-      function normalizeLowQualityReasons(input) {
-        const list = Array.isArray(input) ? input : typeof input === 'string' ? [input] : [];
-        const selected = new Set();
-        list.forEach((item) => {
-          if (typeof item !== 'string') {
-            return;
-          }
-          const trimmed = item.trim();
-          if (isValidLowQualityReasonValue(trimmed)) {
-            selected.add(trimmed);
-          }
-        });
-        return LOW_QUALITY_REASONS
-          .map((reason) => reason.value)
-          .filter((value) => selected.has(value));
-      }
-
-      function normalizeLowQualityOtherText(value) {
-        if (typeof value !== 'string') {
-          return '';
-        }
-        return value.trim();
-      }
-
-      function areReasonArraysEqual(a, b) {
-        if (a === b) {
-          return true;
-        }
-        if (!Array.isArray(a) || !Array.isArray(b)) {
-          return false;
-        }
-        if (a.length !== b.length) {
-          return false;
-        }
-        for (let i = 0; i < a.length; i += 1) {
-          if (a[i] !== b[i]) {
-            return false;
-          }
-        }
-        return true;
-      }
-
       const storageKeys = {
         state: (uid) => `survey_state_${toStorageKeyFragment(uid)}`,
         queue: (uid) => `survey_queue_${toStorageKeyFragment(uid)}`
@@ -1475,20 +1271,11 @@ Promemoria per la configurazione di Formsubmit
         if (!value || typeof value !== 'object') {
           return {};
         }
-        const normalized = {
+        return {
           quality: typeof value.quality === 'number' ? value.quality : undefined,
           posted: Boolean(value.posted),
           submissionId: typeof value.submissionId === 'string' ? value.submissionId : undefined
         };
-        const reasons = normalizeLowQualityReasons(value.low_quality_reasons || value.low_quality_reason);
-        if (reasons.length > 0) {
-          normalized.low_quality_reasons = reasons;
-        }
-        const otherText = normalizeLowQualityOtherText(value.low_quality_other_text);
-        if (otherText) {
-          normalized.low_quality_other_text = otherText;
-        }
-        return normalized;
       }
 
       function persistState() {
@@ -1745,13 +1532,6 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
         const answer = state.answers[index] || {};
         const total = getTotalVideos();
         const quality = typeof answer.quality === 'number' ? answer.quality : 0;
-        const lowQualityReasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
-        const otherText = typeof answer.low_quality_other_text === 'string' ? answer.low_quality_other_text : '';
-        const isOtherSelected = lowQualityReasons.includes(LOW_QUALITY_OTHER_VALUE);
-        const otherPlaceholder = isOtherSelected
-          ? 'Descrivi quali aspetti migliorare…'
-          : 'Seleziona “Altro” per specificare';
-        const showLowQualityQuestion = quality >= 1 && quality <= 3;
         const videoUrl = entry.url;
         const videoMimeType = getVideoMimeType(videoUrl);
         const clipLabel = `Clip ${entry.clipNumber} di ${entry.content.clipCount}`;
@@ -1828,46 +1608,6 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
                   <div class="stars-scale" aria-hidden="true">
                     <span>1 · Da migliorare</span>
                     <span>5 · Eccellente</span>
-                  </div>
-                </fieldset>
-                <fieldset class="followup-fieldset" data-role="low-quality-reason" ${showLowQualityQuestion ? '' : 'hidden'}>
-                  <legend>Quali aspetti pensi si possano migliorare?</legend>
-                  <p class="fieldset-note">Puoi selezionare un solo elemento.</p>
-                  <div class="improvement-options">
-                    ${LOW_QUALITY_REASONS.map((option) => {
-                      if (option.type === 'other') {
-                        const optionId = `low-quality-${option.value}-${index + 1}`;
-                        const textareaId = `low-quality-other-text-${index + 1}`;
-                        const helperId = `low-quality-other-helper-${index + 1}`;
-                        return `
-                          <div class="option option-other${isOtherSelected ? ' is-active' : ''}" data-role="low-quality-other-container">
-                            <div class="option-header">
-                              <input type="radio" id="${escapeAttribute(optionId)}" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${isOtherSelected ? 'checked' : ''}>
-                              <label for="${escapeAttribute(optionId)}">${escapeHtml(option.label)}</label>
-                            </div>
-                            <textarea
-                              id="${escapeAttribute(textareaId)}"
-                              name="low-quality-other-text"
-                              data-role="low-quality-other-text"
-                              rows="3"
-                              maxlength="400"
-                              ${isOtherSelected ? '' : 'disabled'}
-                              placeholder="${escapeAttribute(otherPlaceholder)}"
-                              aria-describedby="${escapeAttribute(helperId)}"
-                              aria-required="${isOtherSelected ? 'true' : 'false'}"
-                              spellcheck="true"
-                            >${escapeHtml(otherText)}</textarea>
-                            <p class="option-helper" id="${escapeAttribute(helperId)}">Specifica quali aspetti vorresti migliorare (campo obbligatorio se selezioni “Altro”).</p>
-                          </div>
-                        `;
-                      }
-                      return `
-                        <label class="option">
-                          <input type="radio" name="low-quality-reasons" value="${escapeAttribute(option.value)}" ${lowQualityReasons.includes(option.value) ? 'checked' : ''}>
-                          <span>${escapeHtml(option.label)}</span>
-                        </label>
-                      `;
-                    }).join('')}
                   </div>
                 </fieldset>
               </form>
@@ -1960,108 +1700,13 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
         const backBtn = appEl.querySelector('[data-action="back"]');
         const starsContainer = form.querySelector('.stars');
         const qualityInputs = Array.from(form.querySelectorAll('input[name="quality"]'));
-        const reasonFieldset = form.querySelector('[data-role="low-quality-reason"]');
-        const reasonInputs = Array.from(form.querySelectorAll('input[name="low-quality-reasons"]'));
-        const otherOptionInput = form.querySelector(`input[name="low-quality-reasons"][value="${LOW_QUALITY_OTHER_VALUE}"]`);
-        const otherTextarea = form.querySelector('[data-role="low-quality-other-text"]');
-        const otherContainer = form.querySelector('[data-role="low-quality-other-container"]');
 
         paintStars(starsContainer, quality);
-        updateReasonVisibility(quality, { preserveSelection: true });
-        refreshOtherControls();
 
         function updateNextState() {
           const answer = state.answers[index] || {};
           const qualityAnswered = typeof answer.quality === 'number' && answer.quality >= 1 && answer.quality <= 5;
-          const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
-          const needsReason = qualityAnswered && answer.quality <= 3;
-          const otherText = normalizeLowQualityOtherText(answer.low_quality_other_text);
-          const otherSelected = reasons.includes(LOW_QUALITY_OTHER_VALUE);
-          const reasonAnswered = !needsReason || (reasons.length > 0 && (!otherSelected || otherText.length > 0));
-          nextBtn.disabled = !(qualityAnswered && reasonAnswered);
-        }
-
-        function updateReasonVisibility(currentQuality, options = {}) {
-          if (!reasonFieldset) {
-            return;
-          }
-          const { preserveSelection } = options;
-          const shouldShow = typeof currentQuality === 'number' && currentQuality >= 1 && currentQuality <= 3;
-          reasonFieldset.hidden = !shouldShow;
-          reasonFieldset.setAttribute('aria-hidden', String(!shouldShow));
-          reasonFieldset.dataset.visible = shouldShow ? 'true' : 'false';
-          reasonInputs.forEach((input) => {
-            input.disabled = !shouldShow;
-          });
-          if (!shouldShow && !preserveSelection) {
-            const hadChecked = reasonInputs.some((input) => input.checked);
-            reasonInputs.forEach((input) => {
-              input.checked = false;
-            });
-            const stored = state.answers[index] || {};
-            const storedReasons = normalizeLowQualityReasons(stored.low_quality_reasons || stored.low_quality_reason);
-            if (storedReasons.length > 0 || hadChecked) {
-              saveAnswer(index, { low_quality_reasons: [] });
-            }
-            clearOtherAnswer();
-          }
-          refreshOtherControls();
-        }
-
-        function getStoredOtherText() {
-          const stored = state.answers[index];
-          return stored && typeof stored.low_quality_other_text === 'string' ? stored.low_quality_other_text : '';
-        }
-
-        function refreshOtherControls(options = {}) {
-          const { focus = false } = options;
-          if (!otherTextarea) {
-            if (otherContainer) {
-              otherContainer.classList.remove('is-active');
-            }
-            return;
-          }
-          const fieldsetVisible = reasonFieldset ? !reasonFieldset.hidden : true;
-          const isChecked = Boolean(fieldsetVisible && otherOptionInput && otherOptionInput.checked);
-          otherTextarea.disabled = !isChecked;
-          otherTextarea.required = isChecked;
-          otherTextarea.setAttribute('aria-required', isChecked ? 'true' : 'false');
-          otherTextarea.setAttribute('aria-hidden', isChecked ? 'false' : 'true');
-          otherTextarea.placeholder = isChecked ? 'Descrivi quali aspetti migliorare…' : 'Seleziona “Altro” per specificare';
-          if (isChecked && focus) {
-            const raf = typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function'
-              ? window.requestAnimationFrame.bind(window)
-              : (cb) => setTimeout(cb, 16);
-            raf(() => {
-              otherTextarea.focus();
-              otherTextarea.select();
-            });
-          }
-          if (otherContainer) {
-            otherContainer.classList.toggle('is-active', isChecked);
-          }
-        }
-
-        function clearOtherAnswer() {
-          if (!otherTextarea) {
-            if (otherContainer) {
-              otherContainer.classList.remove('is-active');
-            }
-            return;
-          }
-          const storedText = normalizeLowQualityOtherText(getStoredOtherText());
-          if (otherTextarea.value) {
-            otherTextarea.value = '';
-          }
-          if (storedText) {
-            saveAnswer(index, { low_quality_other_text: '' });
-          }
-          if (otherOptionInput) {
-            otherOptionInput.checked = false;
-          }
-          if (otherContainer) {
-            otherContainer.classList.remove('is-active');
-          }
+          nextBtn.disabled = !qualityAnswered;
         }
 
         qualityInputs.forEach((input) => {
@@ -2069,38 +1714,12 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
             const value = Number(event.target.value);
             paintStars(starsContainer, value);
             saveAnswer(index, { quality: value });
-            updateReasonVisibility(value);
             updateNextState();
           });
           input.addEventListener('keydown', (event) => handleStarKeydown(event, qualityInputs));
         });
 
         starsContainer.addEventListener('keydown', (event) => handleStarKeydown(event, qualityInputs));
-
-        reasonInputs.forEach((input) => {
-          input.addEventListener('change', (event) => {
-            const selected = reasonInputs
-              .filter((item) => item.checked)
-              .map((item) => item.value);
-            saveAnswer(index, { low_quality_reasons: selected });
-            const otherSelected = selected.includes(LOW_QUALITY_OTHER_VALUE);
-            if (otherSelected) {
-              refreshOtherControls({ focus: event.target.value === LOW_QUALITY_OTHER_VALUE });
-            } else {
-              clearOtherAnswer();
-              refreshOtherControls();
-            }
-            updateNextState();
-          });
-        });
-
-        if (otherTextarea) {
-          otherTextarea.addEventListener('input', (event) => {
-            saveAnswer(index, { low_quality_other_text: event.target.value });
-            refreshOtherControls();
-            updateNextState();
-          });
-        }
 
         backBtn.addEventListener('click', () => {
           if (index === 0) {
@@ -2143,12 +1762,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
           return false;
         }
         const qualityAnswered = typeof answer.quality === 'number' && answer.quality >= 1 && answer.quality <= 5;
-        const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
-        const needsReason = qualityAnswered && answer.quality <= 3;
-        const otherText = normalizeLowQualityOtherText(answer.low_quality_other_text);
-        const otherSelected = reasons.includes(LOW_QUALITY_OTHER_VALUE);
-        const reasonAnswered = !needsReason || (reasons.length > 0 && (!otherSelected || otherText.length > 0));
-        return qualityAnswered && reasonAnswered;
+        return qualityAnswered;
       }
 
       function renderFinal() {
@@ -2218,43 +1832,15 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
       function saveAnswer(index, partial) {
         const current = state.answers[index] ? { ...state.answers[index] } : {};
         delete current.is_ai;
-        const existingReasons = normalizeLowQualityReasons(current.low_quality_reasons || current.low_quality_reason);
-        if (existingReasons.length > 0) {
-          current.low_quality_reasons = existingReasons;
-        } else {
-          delete current.low_quality_reasons;
-        }
+        delete current.low_quality_reasons;
         delete current.low_quality_reason;
+        delete current.low_quality_other_text;
         let changed = false;
         if (Object.prototype.hasOwnProperty.call(partial, 'quality')) {
           if (current.quality !== partial.quality) {
             changed = true;
           }
           current.quality = partial.quality;
-        }
-        if (Object.prototype.hasOwnProperty.call(partial, 'low_quality_reasons')) {
-          const normalized = normalizeLowQualityReasons(partial.low_quality_reasons);
-          const existing = Array.isArray(current.low_quality_reasons) ? current.low_quality_reasons : [];
-          if (!areReasonArraysEqual(normalized, existing)) {
-            changed = true;
-          }
-          if (normalized.length > 0) {
-            current.low_quality_reasons = normalized;
-          } else {
-            delete current.low_quality_reasons;
-          }
-        }
-        if (Object.prototype.hasOwnProperty.call(partial, 'low_quality_other_text')) {
-          const normalizedText = normalizeLowQualityOtherText(partial.low_quality_other_text);
-          const existingText = typeof current.low_quality_other_text === 'string' ? current.low_quality_other_text : '';
-          if (normalizedText !== existingText) {
-            changed = true;
-          }
-          if (normalizedText) {
-            current.low_quality_other_text = normalizedText;
-          } else {
-            delete current.low_quality_other_text;
-          }
         }
         if (changed) {
           if (current.submissionId && dataAdapter) {
@@ -2271,21 +1857,15 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
         const videoId = makeVideoId(index);
         const submissionId = makeSubmissionId(state.uid, videoId, answer);
         const timestamp = new Date().toISOString();
-        const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
-        const otherText = normalizeLowQualityOtherText(answer.low_quality_other_text);
         const entry = getPlaylistEntry(index);
         const record = {
           user_code: state.uid,
           video_id: videoId,
           quality_rating: answer.quality,
-          low_quality_reasons: reasons,
           timestamp,
           user_agent: navigator.userAgent,
           submission_id: submissionId
         };
-        if (otherText) {
-          record.low_quality_other_text = otherText;
-        }
         if (entry) {
           record.section_id = entry.section.id;
           record.section_title = entry.section.title;
@@ -2443,9 +2023,7 @@ Durante il test visionerai serie di clip raggruppate per team di produzione: ogn
       }
 
       function makeSubmissionId(uid, videoId, answer) {
-        const reasons = normalizeLowQualityReasons(answer.low_quality_reasons || answer.low_quality_reason);
-        const otherText = normalizeLowQualityOtherText(answer.low_quality_other_text);
-        const payload = `${uid}::${videoId}::${answer.quality}::${reasons.join('|')}::${otherText}`;
+        const payload = `${uid}::${videoId}::${answer.quality}`;
         const hash = hashString(payload);
         return `${uid}-${videoId}-${hash}`;
       }
