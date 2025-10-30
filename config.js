@@ -1,7 +1,7 @@
 window.CONFIG = {
   SURVEY_TITLE: 'Valutazione di Ricostruzioni Video Generate con AI',
   FORM_ENDPOINT: 'https://formsubmit.co/ajax/tech.transformation.mdst@gmail.com',
-  VIDEO_BASE_URL: 'https://aiworkshopmediaset.s3.eu-west-1.amazonaws.com/video/',
+  VIDEO_BASE_URL: 'https://aiworkshopmediaset.s3.eu-west-1.amazonaws.com/video-genai/',
   sections: [
     {
       title: 'Ricostruzioni di cronaca generate da script',
